@@ -5,16 +5,13 @@ go 1.19
 require (
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.9.1
-	github.com/pquerna/otp v1.4.0
-	github.com/satori/go.uuid v1.2.0
-	github.com/wpcodevo/two_factor_golang v0.0.0-20221013142822-edef428fa23c
+	github.com/google/uuid v1.3.0
 	golang.org/x/crypto v0.11.0
 	gorm.io/driver/sqlite v1.5.2
 	gorm.io/gorm v1.25.2
 )
 
 require (
-	github.com/boombuler/barcode v1.0.1-0.20190219062509-6c824513bacc // indirect
 	github.com/bytedance/sonic v1.9.1 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect

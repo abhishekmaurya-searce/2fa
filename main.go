@@ -5,11 +5,11 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/abhishekmaurya0/2fa/controllers"
+	"github.com/abhishekmaurya0/2fa/models"
+	"github.com/abhishekmaurya0/2fa/routes"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/wpcodevo/two_factor_golang/controllers"
-	"github.com/wpcodevo/two_factor_golang/models"
-	"github.com/wpcodevo/two_factor_golang/routes"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
