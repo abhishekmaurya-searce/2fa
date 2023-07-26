@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package auth;
+option go_package = "github.com/abhishekmaurya0/2fa/proto";
+
+message RegisterUserRequest {
+    string name = 1;
+    string email = 2;
+    string password = 3;
+}
+
+message LoginUserRequest {
+    string email = 1;
+    string password = 2;
+    string otp = 3;
+}
+message UserResponse {
+    string name = 2;
+    string email = 3;
+    bool otp_enabled = 4;
+    string otp_secret = 5;
+}
+
+service AuthService {
+    rpc SignUpUser(RegisterUserRequest) returns (UserResponse) {}
+    rpc LoginUser(LoginUserRequest) returns (UserResponse) {}
+    rpc Enable2FA(LoginUserRequest) returns (UserResponse) {}
+    rpc Disable2FA(LoginUserRequest) returns (UserResponse){}
+}
