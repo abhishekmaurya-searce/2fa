@@ -8,7 +8,7 @@ import (
 	pb "github.com/abhishekmaurya0/2fa/proto"
 )
 
-func doSignUpUser(c pb.AuthServiceClient) {
+func DoSignUpUser(c pb.AuthServiceClient) {
 	res, err := c.SignUpUser(context.Background(), &pb.RegisterUserRequest{
 		Name:     "Abhishek Maurya",
 		Email:    "abhishek.maurya@searce.com",

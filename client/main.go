@@ -18,5 +18,5 @@ func main() {
 	}
 	defer conn.Close()
 	c := pb.NewAuthServiceClient(conn)
-	doSignUpUser(c)
+	DoEnable2fa(c)
 }

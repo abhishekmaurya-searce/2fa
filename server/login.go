@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"crypto/ecdsa"
 	"strings"
 	"time"
 
@@ -35,6 +36,16 @@ func (s *Server) LoginUser(ctx context.Context, req *pb.LoginUserRequest) (*pb.U
 			return nil, status.Errorf(codes.InvalidArgument, "OTP verification unsuccessful")
 		}
 	}
-
+	// Token Varification
+	publickey, err := auth.PublicKeyFromPEM(user.PublicKey)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Error in getting private key for signing")
+	}
+	flag := ecdsa.VerifyASN1(publickey, []byte(req.Hash), []byte(req.Sign))
+	if !flag {
+		if !flag {
+			return nil, status.Errorf(codes.Internal, "Failed to Sign In")
+		}
+	}
 	return userResponse, nil
 }

@@ -21,14 +21,12 @@ func (s *Server) Enable2FA(ctx context.Context, req *pb.LoginUserRequest) (*pb.U
 	if !auth.ValidatePass(req.Password, []byte(user.Password)) {
 		return nil, status.Errorf(codes.InvalidArgument, "Invalid Password")
 	}
-
 	user.Otp_enabled = true
 	user.Otp_secret = auth.GenerateSecretKey()
 	result = s.DB.Save(&user)
 	if result.Error != nil {
 		return nil, status.Errorf(codes.Internal, "Failed to update user")
 	}
-
 	userResponse := &pb.UserResponse{
 		Name:       user.Name,
 		Email:      user.Email,

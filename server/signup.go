@@ -2,6 +2,9 @@ package server
 
 import (
 	"context"
+	"crypto/ecdsa"
+	"crypto/elliptic"
+	"crypto/rand"
 	"strings"
 
 	auth "github.com/abhishekmaurya0/2fa/controller"
@@ -17,12 +20,17 @@ func (s *Server) SignUpUser(ctx context.Context, req *pb.RegisterUserRequest) (*
 		return nil, status.Errorf(codes.InvalidArgument, "Wrong Password")
 	}
 	req.Password = string(pass)
-
+	keys, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Failed to generate key pair")
+	}
+	private, public := auth.GenerateKeys(keys)
 	newUser := models.User{
 		Name:        req.Name,
 		Email:       strings.ToLower(req.Email),
 		Password:    req.Password,
 		Otp_enabled: false,
+		PublicKey:   public,
 	}
 
 	result := s.DB.Create(&newUser)
@@ -36,5 +44,6 @@ func (s *Server) SignUpUser(ctx context.Context, req *pb.RegisterUserRequest) (*
 	userres.Email = newUser.Email
 	userres.OtpEnabled = false
 	userres.OtpSecret = "nil"
+	userres.PrivateKey = private
 	return &userres, nil
 }

@@ -10,6 +10,8 @@ type User struct {
 
 	Otp_secret   string
 	Otp_auth_url string
+
+	PublicKey string
 }
 
 type RegisterUserInput struct {
