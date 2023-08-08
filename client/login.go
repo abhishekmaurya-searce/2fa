@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"crypto/ecdsa"
+	"crypto/rand"
 	"fmt"
 	"strings"
 	"time"
@@ -21,6 +23,9 @@ func Login(s Client) error {
 	if result.Error != nil {
 		return fmt.Errorf("Error in getting data from client DB")
 	}
+	private_key,err := auth.PrivateKeyFromPEM(user.Private_key)
+	hash := auth.GenerateHash(user.Secret,time.Now())
+	ecdsa.SignASN1(rand.Reader,private_key,)
 	s.LoginUser(context.Background(), &pb.LoginUserRequest{
 		Email:    user.Email,
 		Password: user.Password,

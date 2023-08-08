@@ -144,7 +144,7 @@ func PublicKeyFromPEM(publicKeyPEM string) (*ecdsa.PublicKey, error) {
 	return ecdsaPublicKey, nil
 }
 
-func GenerateTooken(key *ecdsa.PrivateKey, secret string) ([]byte, error) {
+func GenerateToken(key *ecdsa.PrivateKey, secret string) ([]byte, error) {
 	hash := GenerateHash(secret, time.Now())
 	sign, err := ecdsa.SignASN1(rand.Reader, key, hash)
 	if err != nil {

@@ -15,7 +15,6 @@ message LoginUserRequest {
     string otp = 3;
     string token = 4;
     string hash = 5;
-    string sign = 6;
 }
 message UserResponse {
     string name = 2;
