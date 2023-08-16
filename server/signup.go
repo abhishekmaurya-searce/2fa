@@ -5,6 +5,7 @@ import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
+	"fmt"
 	"strings"
 
 	auth "github.com/abhishekmaurya0/2fa/controller"
@@ -25,7 +26,7 @@ func (s *Server) SignUpUser(ctx context.Context, req *pb.RegisterUserRequest) (*
 		return nil, status.Errorf(codes.Internal, "Failed to generate key pair")
 	}
 	private, public := auth.GenerateKeys(keys)
-	newUser := models.User{
+	newUser := &models.User{
 		Name:        req.Name,
 		Email:       strings.ToLower(req.Email),
 		Password:    req.Password,
@@ -41,9 +42,11 @@ func (s *Server) SignUpUser(ctx context.Context, req *pb.RegisterUserRequest) (*
 		return nil, status.Errorf(codes.Internal, "Failed to create user")
 	}
 	var userres pb.UserResponse
+	userres.Name = newUser.Name
 	userres.Email = newUser.Email
 	userres.OtpEnabled = false
 	userres.OtpSecret = "nil"
 	userres.PrivateKey = private
+	fmt.Println("name: ", userres.Name)
 	return &userres, nil
 }

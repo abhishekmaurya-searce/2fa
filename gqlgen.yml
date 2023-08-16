@@ -1,0 +1,19 @@
+schema:
+  - graphql/schema.graphqls
+
+# This is the directory where the generated code will be placed.
+exec:
+  filename: graphql/generated.go
+  package: graph
+
+# This is the resolver package path.
+model:
+  filename: graphql/model_gen.go
+  package: graph
+
+# This is the resolver package path.
+resolver:
+  layout: follow-schema
+  dir: graphql
+  package: graph
+

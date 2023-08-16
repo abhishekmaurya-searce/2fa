@@ -13,8 +13,8 @@ message LoginUserRequest {
     string email = 1;
     string password = 2;
     string otp = 3;
-    string token = 4;
-    string hash = 5;
+    bytes token = 4;
+    bytes hash = 5;
 }
 message UserResponse {
     string name = 2;

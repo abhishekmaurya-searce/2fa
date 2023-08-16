@@ -1,0 +1,29 @@
+input RegisterUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+  otp: String!
+  token: String!
+  hash: String!
+}
+
+type UserResponse {
+  name: String!
+  email: String!
+  otpEnabled: Boolean!
+  otpSecret: String!
+  privateKey: String!
+}
+
+
+type Mutation {
+  signUpUser(input: RegisterUserInput!): UserResponse!
+  loginUser(input: LoginUserInput!): UserResponse!
+  enable2FA(input: LoginUserInput!): UserResponse!
+  disable2FA(input: LoginUserInput!): UserResponse!
+}

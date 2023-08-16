@@ -8,5 +8,6 @@ runserver:
 	./bin/auth/server
 runclient:
 	./bin/auth/client
-
-.PHONY: proto client server runclient runserver
+gqlgen:
+	go run github.com/99designs/gqlgen generate --config gqlgen.yml
+.PHONY: proto client server runclient runserver build gqlgen
